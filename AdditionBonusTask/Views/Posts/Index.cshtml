@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AdditionBonusTask.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-light p-3" style="border-radius:10px">
+    <h1 style="text-align:center">Posts</h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostText)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PublicDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostImage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PublicDate)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => Model.Where(s=>s.UserId==item.UserId))*@
+                        @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
